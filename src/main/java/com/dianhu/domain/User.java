@@ -6,13 +6,14 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 
 /**
  * Time : 18-8-29 下午10:08
  * Author : hcy
  * Description :
  */
-public class User {
+public class User implements Serializable{
     @NotEmpty(message="姓名不能为空")
     private String name;
     @Max(value = 100, message = "年龄不能大于 100 岁")
@@ -52,4 +53,8 @@ public class User {
         this.pass = pass;
     }
 
+    @Override
+    public String toString() {
+        return "name:"+name+","+"pass:"+pass+","+"age:"+","+age;
+    }
 }

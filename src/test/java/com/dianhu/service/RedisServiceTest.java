@@ -55,4 +55,17 @@ public class RedisServiceTest {
         redisService.setHash("user", "name", JSON.toJSONString(user));
         logger.info("用户姓名：{}", redisService.getHash("user","name"));
     }
+
+    @Test
+    public void testRedisTemplate() {
+        //测试Redis的string类型
+        redisService.set("hcy","胡埕源大人");
+        logger.info("hcy：{}", redisService.get("hcy"));
+
+        User user = new User("hcy", "123456");
+        redisService.set("userHcyInfo", user);
+        logger.info("用户信息：{}", redisService.get("userHcyInfo"));
+    }
+
+
 }

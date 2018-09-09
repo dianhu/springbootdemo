@@ -1,12 +1,11 @@
 package com.dianhu.service;
 
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -18,6 +17,9 @@ import java.util.List;
 public class RedisService {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * set redis: string类型
@@ -79,5 +81,28 @@ public class RedisService {
      */
     public List<String> getList(String key, long start, long end){
         return stringRedisTemplate.opsForList().range(key, start, end);
+    }
+
+    public boolean set(final String key, Object value) {
+        boolean result = false;
+        try {
+            ValueOperations<String, Object> operations = redisTemplate.opsForValue();
+            operations.set(key, value);
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public Object get(final String key) {
+        Object result = null;
+        try {
+            ValueOperations<String, Object> operations = redisTemplate.opsForValue();
+            result = operations.get(key);
+        } catch (Exception e) {
+
+        }
+        return result;
     }
 }
