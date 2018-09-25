@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="hello" class="com.dianhu.bean.Hello"/>
+    <bean id="world" class="com.dianhu.bean.World"/>
+    <bean id="helloFactory" class="com.dianhu.bean.HelloFactoryBean"/>
+    <bean class="com.dianhu.bean.LoggerBeanPostProcessor"/>
+    <bean id="news" class="com.dianhu.bean.News" scope="prototype"/>
+    <bean id="newsProvider" class="com.dianhu.bean.NewsProvider">
+        <lookup-method name="getNews" bean="news"/>
+    </bean>
+</beans>
