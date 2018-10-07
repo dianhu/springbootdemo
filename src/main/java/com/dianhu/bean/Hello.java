@@ -9,10 +9,12 @@ public class Hello {
     private String content;
 
     public String getContent() {
+        System.out.println("-------do getContent()--------");
         return content;
     }
 
     public void setContent(String content) {
+        System.out.println("-------do setContent()--------");
         this.content = content;
     }
 }
