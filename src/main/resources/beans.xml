@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-
+       xmlns:content="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--<content:component-scan base-package="com.dianhu.bean"/>-->
     <bean id="hello" class="com.dianhu.bean.Hello"/>
     <bean id="world" class="com.dianhu.bean.World"/>
     <bean id="helloFactory" class="com.dianhu.bean.HelloFactoryBean"/>
@@ -11,6 +12,11 @@
     <bean id="newsProvider" class="com.dianhu.bean.NewsProvider">
         <lookup-method name="getNews" bean="news"/>
     </bean>
+    <bean id="serviceA" class="com.dianhu.bean.ServiceA"/>
+    <!--在没有component-scan的情况下不加autowire不会自动注入 -->
+    <bean id="serviceB" class="com.dianhu.bean.ServiceB"/>
+    <!--显示定义这个类可以解析@Autowired注解-->
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 
     <bean id="helloAutoAspect" class="com.dianhu.aop.HelloAutoAspect"/>
     <bean id="helloAspect" class="com.dianhu.aop.HelloAspect"></bean>

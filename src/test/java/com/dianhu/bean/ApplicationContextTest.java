@@ -35,5 +35,12 @@ public class ApplicationContextTest {
         System.out.println("news 2 -> " + newsProvider.getNews());
     }
 
+    @Test
+    public void testAutowire() {
+        String configLocation = "beans.xml";
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(configLocation);
+        ServiceB serviceB = applicationContext.getBean("serviceB", ServiceB.class);
+        serviceB.sayHello();
+    }
 
 }
